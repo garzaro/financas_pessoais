@@ -23,7 +23,7 @@ public class UsuarioRepositoryTest {
     @Autowired
     UsuarioRepository usuarioRepository;
 
-    /*RESOLVER PROBLEMA DE DEPENDENCIA*/
+    /*ESSE TESTE PRECISA DE ATENÇÃO*/
    
     @Test
     public void deveVerificarAExistenciaDeUmEmailNaBaseDeDados() {
