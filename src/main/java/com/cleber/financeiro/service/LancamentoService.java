@@ -1,7 +1,7 @@
-package com.cleber.financas.service;
+package com.cleber.financeiro.service;
 
-import com.cleber.financas.model.entity.Lancamento;
-import com.cleber.financas.model.entity.StatusLancamento;
+import com.cleber.financeiro.model.entity.Lancamento;
+import com.cleber.financeiro.model.entity.StatusLancamento;
 
 import java.util.List;
 import java.util.Optional;
