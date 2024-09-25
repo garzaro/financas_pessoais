@@ -1,14 +1,14 @@
 package com.cleber.financeiro.api.resource;
 
-import com.cleber.financeiro.model.repository.LancamentoRepository;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.cleber.financeiro.api.dto.UsuarioAutenticacaoDTO;
+
 import com.cleber.financeiro.api.dto.UsuarioCadastroDTO;
 import com.cleber.financeiro.exception.ErroDeAutenticacao;
 import com.cleber.financeiro.exception.RegraDeNegocioException;

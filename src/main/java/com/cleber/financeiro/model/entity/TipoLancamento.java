@@ -1,4 +1,4 @@
-package com.cleber.financas.model.entity;
+package com.cleber.financeiro.model.entity;
 
 public enum TipoLancamento {
     

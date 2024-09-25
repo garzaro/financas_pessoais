@@ -1,4 +1,4 @@
-package com.cleber.financas.api.dto;
+package com.cleber.financeiro.api.dto;
 
 import lombok.Builder;
 import lombok.Getter;
