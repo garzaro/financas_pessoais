@@ -21,7 +21,6 @@ import java.util.Optional;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class UsuarioRepositoryMelhoriasTest {
     
-    /*Inicio teste com Dougllas Sousa (Udemy)*/
     @Autowired
     UsuarioRepository usuarioRepository;
 
