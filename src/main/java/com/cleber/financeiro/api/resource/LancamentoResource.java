@@ -1,13 +1,13 @@
-package com.cleber.financas.api.resource;
+package com.cleber.financeiro.api.resource;
 
-import com.cleber.financas.api.dto.LancamentoDTO;
-import com.cleber.financas.exception.RegraDeNegocioException;
-import com.cleber.financas.model.entity.Lancamento;
-import com.cleber.financas.model.entity.StatusLancamento;
-import com.cleber.financas.model.entity.TipoLancamento;
-import com.cleber.financas.model.entity.Usuario;
-import com.cleber.financas.service.LancamentoService;
-import com.cleber.financas.service.UsuarioService;
+import com.cleber.financeiro.api.dto.LancamentoDTO;
+import com.cleber.financeiro.exception.RegraDeNegocioException;
+import com.cleber.financeiro.model.entity.Lancamento;
+import com.cleber.financeiro.model.entity.StatusLancamento;
+import com.cleber.financeiro.model.entity.TipoLancamento;
+import com.cleber.financeiro.model.entity.Usuario;
+import com.cleber.financeiro.service.LancamentoService;
+import com.cleber.financeiro.service.UsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
