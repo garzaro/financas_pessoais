@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name= "usuario", schema = "financeiro")
+@Table(name= "usuario", schema = "financas")
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,8 +23,8 @@ public class Usuario {
     
     @Column(name = "nome_completo")
     private String nomeCompleto;
-    
-    @Column(name = "cpf")
+       
+	@Column(name = "cpf")
     private String cadastroPessoaFisica;
     
     @Column(name = "nome_usuario")
@@ -41,5 +41,21 @@ public class Usuario {
     private LocalDate dataCadastro;
 
     /*GETTERS AND SETTERS*/
+    
+    public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
 }
 
