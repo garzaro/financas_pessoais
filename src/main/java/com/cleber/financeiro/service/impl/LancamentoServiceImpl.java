@@ -18,20 +18,17 @@ import java.util.Optional;
 @Service
 public class LancamentoServiceImpl implements LancamentoService {
     
-    /*para injetar uma instancia de repositoy, precisa de um contrutor*/
     private LancamentoRepository lancamentoRepository;
     
-    /*construtor contendo um instancia para injetar*/
     public LancamentoServiceImpl(LancamentoRepository lancamentoRepository) {
         this.lancamentoRepository = lancamentoRepository;
     }
     
     @Override
-    @Transactional /*spring abre transação com a base, roda o metodo, faz commit e, se error, then rollback*/
+    @Transactional
     public Lancamento salvarLancamento(Lancamento lancamento) {
-        /*chamando*/
+
         validarLancamento(lancamento);
-        /*lancamento salva automaticamente tem status de pendente*/
         lancamento.setStatusLancamento(StatusLancamento.PENTENDE);
         return lancamentoRepository.save(lancamento);
     }
@@ -39,17 +36,17 @@ public class LancamentoServiceImpl implements LancamentoService {
     @Override
     @Transactional
     public Lancamento atualizarLancamento(Lancamento lancamento) {
-        /*Checagem: se não existir um id de lancamento salvo ele persiste e lança um novo id...*/
-        Objects.requireNonNull(lancamento.getId()); /*...garantindo que será passado o lancamento com um novo id*/
+
+        Objects.requireNonNull(lancamento.getId());
         validarLancamento(lancamento);
-        return lancamentoRepository.save(lancamento); /*...se nao passar da nullPointerException*/
+        return lancamentoRepository.save(lancamento);
     }
     
     @Override
     @Transactional
     public void deletarLancamento(Lancamento lancamento) {
-        /*so deleta se existir um lancamento salvo*/
-        Objects.requireNonNull(lancamento.getId()); /*Checagem: para garantir que esteja passando o lancamento salvo*/
+
+        Objects.requireNonNull(lancamento.getId());
         lancamentoRepository.delete(lancamento);
     }
     
@@ -58,22 +55,20 @@ public class LancamentoServiceImpl implements LancamentoService {
     public List<Lancamento> buscarLancamento(Lancamento lancamentoFiltro) {
         Example example = Example.of(lancamentoFiltro, ExampleMatcher
                 .matching()
-                /*ignora se o usuario digitou com caixa alta ou baixa*/
                 .withIgnoreCase()
-                /*contendo o que for passado na busca - CONTAINING*/
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING));
         return lancamentoRepository.findAll(example);
     }
     
     @Override
     public void atualizarStatus(Lancamento lancamento, StatusLancamento status) {
-        lancamento.setStatusLancamento(status); /*seta o estatus do lancamento*/
-        atualizarLancamento(lancamento); /*usa a implemetnacao de salvar lancamento para efetivar*/
+        lancamento.setStatusLancamento(status);
+        atualizarLancamento(lancamento);
     }
     
     @Override
     public void validarLancamento(Lancamento lancamento) {
-        /*informar uma descrição válida, trim remove espaço vazio no inicio e no fim tornando um string vazia*/
+
         if (lancamento.getDescricao() == null || lancamento.getDescricao().trim().equals("")){
             throw new RegraDeNegocioException("Informar uma descrição válida.");
         }
@@ -86,7 +81,7 @@ public class LancamentoServiceImpl implements LancamentoService {
         if (lancamento.getUsuario() == null || lancamento.getUsuario().getId() == null){
             throw new RegraDeNegocioException("Informar um Usuário.");
         }
-        /*compareTo para compara valor como BigDecimal*/
+
         if (lancamento.getValor() == null || lancamento.getValor().compareTo(BigDecimal.ZERO) < 1){
             throw new RegraDeNegocioException("Informe um valor válido.");
         }

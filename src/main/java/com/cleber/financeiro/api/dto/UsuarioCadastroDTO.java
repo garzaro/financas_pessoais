@@ -7,9 +7,6 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
-/*Não usei @Builder, @Getter, @Setter
-* resolvi criar na mão o codigo*/
-
 public class UsuarioCadastroDTO {
     
     private String nomeCompleto;
@@ -23,8 +20,7 @@ public class UsuarioCadastroDTO {
 		
 	}
     
-    /*BUILDER*/
-    private UsuarioCadastroDTO(UsuarioBuilder builder) {
+   private UsuarioCadastroDTO(UsuarioBuilder builder) {
         
         this.nomeCompleto = builder.nomeCompleto;
         this.cadastroPessoaFisica = builder.cadastroPessoaFisica;

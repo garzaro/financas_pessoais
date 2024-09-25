@@ -24,9 +24,8 @@ public class UsuarioServiceImpl implements UsuarioService {
     
     @Override
     public Usuario autenticarUsuario(String email, String senha) {
-        /*login, validando login*/
+
         Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
-        /*verificar a existencia de usuario na base de dados*/
         if (!usuario.isPresent()){
             throw new ErroDeAutenticacao("Usuario não encontrado pelo email informado");
         }
@@ -38,18 +37,15 @@ public class UsuarioServiceImpl implements UsuarioService {
     
     @Override
     @Transactional
-    public Usuario persistirUsuarioNabaseDeDados(Usuario usuario) {
+    public Usuario salvarUsuario(Usuario usuario) {
 
-        /*deve validar o email, verificar se existe. (metodo do Service)*/
-        validarEmailNaBaseDedados(usuario.getEmail());
-
-        /*se nao existir email, salva a instancia*/
+        validarEmail(usuario.getEmail());
         return usuarioRepository.save(usuario);
     }
     
     @Override
-    public void validarEmailNaBaseDedados(String email) {
-        /*ver se o email existe*/
+    public void validarEmail(String email) {
+
         boolean verificarSeOEmailExisteNaBaseDeDados = usuarioRepository.existsByEmail(email);
         if (verificarSeOEmailExisteNaBaseDeDados){
             throw new RegraDeNegocioException("Ja existe um usuario com esse email.");

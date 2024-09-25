@@ -27,7 +27,7 @@ public class LancamentoResource {
         this.lancamentoService = lancamentoService;
     }
     
-    @PostMapping /*MAPEAR REQUISICAO HTTP, criar recurso no servidor*/
+    @PostMapping
     public ResponseEntity salvarLancamento(@RequestBody LancamentoDTO dto){
         try {
             Lancamento converteEntidade = converterDtoParaEntidade(dto);
@@ -39,26 +39,20 @@ public class LancamentoResource {
         }
     }
     
-    /*entity é o retorno do service quando é obtido por id*/
-    @PutMapping("{id}") /*mapear requisicao HTTP*/
+    @PutMapping("{id}")
     public ResponseEntity atualizarLancamento(@PathVariable("id") Long id,  @RequestBody LancamentoDTO dto){
-        /*entity é resultado da busca pelo id*/
+
         return lancamentoService.obterLancamentoPorId(id).map(entity ->{
             try {
                 Lancamento lancamento = converterDtoParaEntidade(dto);
                 lancamento.setId(entity.getId());
                 lancamentoService.atualizarLancamento(lancamento);
-                /*return new ResponseEntity(lancamento, HttpStatus.CREATED)*/
                 return ResponseEntity.ok(lancamento);
             }catch (RegraDeNegocioException e){
                 return ResponseEntity.badRequest().body(e.getMessage());
             }
         }).orElseGet(() -> new ResponseEntity("Lancamento não encontrado", HttpStatus.BAD_REQUEST));
     }
-    
-    /*substitui todos os parametros abaixo, campos da pequisa sao todos opcionais*/
-	/*@RequestParam java.util.Map<String, String> params*/
-    /*opcional na busca, required = false*/
     
     @GetMapping
     public ResponseEntity buscar(
@@ -71,7 +65,6 @@ public class LancamentoResource {
     	lancamentoFiltro.setDescricao(descricao);
         lancamentoFiltro.setMes(mes);
         lancamentoFiltro.setAno(ano);
-        /*Para qual usuario?*/
         Optional<Usuario> usuario = usuarioService.obterUsuarioPorId(idusuario);
         if (usuario.isPresent()) {
             return ResponseEntity.badRequest().body("Consulta não realizada, o usuario não existe");
@@ -91,21 +84,16 @@ public class LancamentoResource {
                 new ResponseEntity("Lançamento não encontrado na base de dados", HttpStatus.BAD_REQUEST) );
     }
     
-    /*Um metodo para converter o dto em uma entidade de lancamento*/
     private Lancamento converterDtoParaEntidade(LancamentoDTO dto){
         Lancamento lancamento = new Lancamento();
-        lancamento.setId(dto.getId()); /*caso precise atualizar, ele vem preenchido com o id */
+        lancamento.setId(dto.getId());
         lancamento.setDescricao(dto.getDescricao());
         lancamento.setAno(dto.getAno());
         lancamento.setMes(dto.getMes());
         lancamento.setValor(dto.getValor());
-        /*inicio usuario*/
-        /*receber o id do usuario, conforme dto*/
         Usuario buscarUsuario = usuarioService.obterUsuarioPorId(dto.getUsuario())
-                /*buscar o usuario por id, ou lancar uma exception caso ele nao exista*/
-        .orElseThrow(() -> new RegraDeNegocioException("Usuario não encontrado com o id informado"));
+                .orElseThrow(() -> new RegraDeNegocioException("Usuario não encontrado com o id informado"));
         lancamento.setUsuario(buscarUsuario);
-        /*fim usuario*/
         lancamento.setTipoLancamento(TipoLancamento.valueOf(dto.getTipo()));
         lancamento.setStatusLancamento(StatusLancamento.valueOf(dto.getStatus()));
         return lancamento;

@@ -16,7 +16,7 @@ import com.cleber.financeiro.model.entity.Usuario;
 import com.cleber.financeiro.service.UsuarioService;
 
 @RestController
-@RequestMapping(path = "/api/usuarios") /*para mapeamento de todas as requisições*/
+@RequestMapping(path = "/api/usuarios")
 public class UsuarioController {
 
     public UsuarioService usuarioService;
@@ -35,8 +35,6 @@ public class UsuarioController {
         }
     }
 
-    /*Salvar - Este método é um endpoint que recebe uma requisição HTTP POST*/
-    /*ResponseEntity representa o corpo da resposta*/
     @PostMapping
     public ResponseEntity salvar(@RequestBody UsuarioCadastroDTO dto) {
         Usuario usuario = Usuario.builder()
@@ -49,13 +47,10 @@ public class UsuarioController {
                 .build();
 
         try {
-            Usuario usuarioSalvo = usuarioService.persistirUsuarioNabaseDeDados(usuario);
+            Usuario usuarioSalvo = usuarioService.salvarUsuario(usuario);
             return new ResponseEntity(usuarioSalvo, HttpStatus.CREATED);
-            /*ou usar url*/
-            /*return ResponseEntity.created(URI.create("/api/usuarios/" + usuarioSalvo.getId())).build();*/
         } catch (RegraDeNegocioException mensagemDeErro) {
             return ResponseEntity.badRequest().body(mensagemDeErro.getMessage());
         }
     }
-    /*@GetMapping("/")public String helloWorld() {return "Fala dev";}*/
 }
