@@ -1,11 +1,8 @@
-package com.cleber.financas.service;
+package com.cleber.financeiro.service;
 
-import com.cleber.financeiro.exception.RegraDeNegocioException;
-import com.cleber.financeiro.model.entity.Usuario;
-import com.cleber.financeiro.model.repository.UsuarioRepository;
-import com.cleber.financeiro.service.UsuarioService;
+import java.time.LocalDate;
+
 import org.assertj.core.api.Assertions;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +10,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.time.LocalDate;
-
+import com.cleber.financeiro.exception.RegraDeNegocioException;
+import com.cleber.financeiro.model.entity.Usuario;
+import com.cleber.financeiro.model.repository.UsuarioRepository;
 
 /*RESOLVER PROBLEMA DE DEPENDENCIA*/
 

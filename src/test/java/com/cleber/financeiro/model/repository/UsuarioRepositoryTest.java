@@ -1,4 +1,4 @@
-package com.cleber.financas.model.repository;
+package com.cleber.financeiro.model.repository;
 
 import com.cleber.financeiro.model.entity.Usuario;
 import com.cleber.financeiro.model.repository.UsuarioRepository;
@@ -18,24 +18,22 @@ import java.util.Optional;
 @ActiveProfiles("test")
 public class UsuarioRepositoryTest {
 
-    /*Inicio teste com Dougllas Sousa (Udemy)*/
+    /*teste, com Dougllas Sousa (Udemy)*/
 
     @Autowired
     UsuarioRepository usuarioRepository;
 
-    /*ESSE TESTE PRECISA DE ATENÇÃO*/
-   
     @Test
     public void deveVerificarAExistenciaDeUmEmailNaBaseDeDados() {
         /*cenario*/
         Usuario usuarioDeTeste = Usuario.builder()
                 .nomeCompleto("Madonna da Silva")
-                .email("clebergarzaro74@gmail.com")
+                .email("laislabonita@gmail.com")
                 .build();
         usuarioRepository.save(usuarioDeTeste);
         
         /*execução/ação*/
-       boolean verficarSeExisteEmail = usuarioRepository.existsByEmail("clebergarzaro74@gmail.com");
+       boolean verficarSeExisteEmail = usuarioRepository.existsByEmail("laislabonita@gmail.com");
        
        /*verficação*/
        Assertions.assertThat(verficarSeExisteEmail).isTrue();
@@ -47,7 +45,7 @@ public class UsuarioRepositoryTest {
        /*cenario, não deve existir email na base*/
         usuarioRepository.deleteAll();
         boolean verificarSeExisteUsuarioCadastradoComEmail =usuarioRepository
-                .existsByEmail("clebergarzaro@gmail.com");
+                .existsByEmail("laislabonita@gmail.com");
         /*verificação*/
         Assertions.assertThat(verificarSeExisteUsuarioCadastradoComEmail).isFalse();
     }
@@ -56,9 +54,9 @@ public class UsuarioRepositoryTest {
     public void devePersistirUsuarioNaBaseDeDados(){
        /*cenario*/
         Usuario persistindoUsuario = Usuario.builder()
-                .nomeCompleto("Cleber")
-                .nomeUsuario("garzaro74")
-                .email("clebergarzaro74@gmail.com")
+                .nomeCompleto("Madonna da Silva")
+                .nomeUsuario("laislabonita")
+                .email("laislabonita@gmail.com")
                 .senha("senha")
                 .dataCadastro(LocalDate.now())
                 .build();
@@ -73,13 +71,13 @@ public class UsuarioRepositoryTest {
     public void deveBuscarUmUsuarioPeloEmail(){
         /*cenario*/
         Usuario salvandoUsuario = Usuario.builder()
-                .nomeUsuario("garzaro74")
-                .email("clebergarzaro74@gmail.com")
+                .nomeUsuario("laislabonita")
+                .email("laislabonita@gmail.com")
                 .build();
         usuarioRepository.save(salvandoUsuario);
         /*ação*/
         Optional<Usuario> pesquisarUsuarioPeloEmail = usuarioRepository
-                .findByEmail("clebergarzaro74@gmail.com");
+                .findByEmail("laislabonita@gmail.com");
         /*verificação*/
         Assertions.assertThat(pesquisarUsuarioPeloEmail.isPresent()).isTrue();
     }
@@ -90,7 +88,7 @@ public class UsuarioRepositoryTest {
         usuarioRepository.deleteAll();
         /*ação*/
         Optional<Usuario> usuarioInexistente =usuarioRepository
-                .findByEmail("clebergarzaro74@gmail.com");
+                .findByEmail("laislabonita@gmail.com");
         /*verificação*/
         Assertions.assertThat(usuarioInexistente.isPresent()).isFalse();
     }

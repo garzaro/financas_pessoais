@@ -1,4 +1,4 @@
-package com.cleber.financas.service;
+package com.cleber.financeiro.service;
 
 import com.cleber.financeiro.exception.RegraDeNegocioException;
 import com.cleber.financeiro.model.entity.Usuario;
