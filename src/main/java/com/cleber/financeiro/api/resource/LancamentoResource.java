@@ -61,7 +61,11 @@ public class LancamentoResource {
     		@RequestParam(value= "ano", required = false) Integer ano,
     		@RequestParam("usuario") Long idusuario
     		) {
-      
+        
+        if (idusuario == null){
+            return ResponseEntity.badRequest().body("O ID do usuário é obrigatório");
+        }
+        
     	Lancamento lancamentoFiltro = new Lancamento();
     	lancamentoFiltro.setDescricao(descricao);
         lancamentoFiltro.setMes(mes);
