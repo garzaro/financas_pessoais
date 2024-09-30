@@ -15,7 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-@ActiveProfiles("test")
+/*@ActiveProfiles("test")*/
 public class UsuarioServiceTest {
     /*RESOLVER PROBLEMA DE DEPENDENCIA*/
     @Autowired

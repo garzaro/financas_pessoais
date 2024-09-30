@@ -19,7 +19,7 @@ import com.cleber.financeiro.model.repository.UsuarioRepository;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-@ActiveProfiles("test")
+/*@ActiveProfiles("test")*/
 public class UsuarioServiceMelhoriasTest {
     
     @Autowired

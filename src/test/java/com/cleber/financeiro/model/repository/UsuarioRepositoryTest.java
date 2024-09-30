@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-@ActiveProfiles("test")
+//@ActiveProfiles("test")
 public class UsuarioRepositoryTest {
 
     /*teste, com Dougllas Sousa (Udemy)*/
