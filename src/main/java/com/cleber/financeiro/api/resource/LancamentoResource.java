@@ -61,16 +61,24 @@ public class LancamentoResource {
     		@RequestParam(value= "ano", required = false) Integer ano,
     		@RequestParam("usuario") Long idusuario
     		) {
+        
+        if (idusuario == null){
+            return ResponseEntity.badRequest().body("O ID do usuário é obrigatório");
+        }
+        
     	Lancamento lancamentoFiltro = new Lancamento();
     	lancamentoFiltro.setDescricao(descricao);
         lancamentoFiltro.setMes(mes);
         lancamentoFiltro.setAno(ano);
+        
         Optional<Usuario> usuario = usuarioService.obterUsuarioPorId(idusuario);
+        
         if (usuario.isPresent()) {
             return ResponseEntity.badRequest().body("Consulta não realizada, o usuario não existe");
         }else {
             lancamentoFiltro.setUsuario(usuario.get());
         }
+        
         List<Lancamento> lancamentos = lancamentoService.buscarLancamento(lancamentoFiltro);
         return ResponseEntity.ok(lancamentos);
     }
@@ -91,8 +99,10 @@ public class LancamentoResource {
         lancamento.setAno(dto.getAno());
         lancamento.setMes(dto.getMes());
         lancamento.setValor(dto.getValor());
+        
         Usuario buscarUsuario = usuarioService.obterUsuarioPorId(dto.getUsuario())
                 .orElseThrow(() -> new RegraDeNegocioException("Usuario não encontrado com o id informado"));
+
         lancamento.setUsuario(buscarUsuario);
         lancamento.setTipoLancamento(TipoLancamento.valueOf(dto.getTipo()));
         lancamento.setStatusLancamento(StatusLancamento.valueOf(dto.getStatus()));
