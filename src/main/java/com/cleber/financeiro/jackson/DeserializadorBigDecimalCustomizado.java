@@ -3,8 +3,8 @@ package com.cleber.financas.jackson;
 /*O SimpleModule é uma classe do Jackson que permite registrar serializadores e desserializadores personalizados
  deserializadorPersonalizado - nome do metodo de acordo com o que a classe SimpleMode faz*/
 
-import com.cleber.financas.exception.RegraDeNegocioException;
-import com.cleber.financas.exception.ValorInvalidoException;
+import com.cleber.financeiro.exception.RegraDeNegocioException;
+import com.cleber.financeiro.exception.ValorInvalidoException;
 import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
