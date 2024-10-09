@@ -1,4 +1,4 @@
-package com.cleber.financas.exception;
+package com.cleber.financeiro.exception;
 
 public class ValorInvalidoException extends RuntimeException{
 
