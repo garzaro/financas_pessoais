@@ -13,7 +13,7 @@ public interface UsuarioService {
     
     Usuario salvarUsuario(Usuario usuario);
     
-    void validarEmail(String email);
+    void validarEmailAndCpf(String email, String cpf);
     
     Optional<Usuario> obterUsuarioPorId(Long id);
 }
