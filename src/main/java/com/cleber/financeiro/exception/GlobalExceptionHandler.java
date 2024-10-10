@@ -1,4 +1,4 @@
-package com.cleber.financas.exception;
+package com.cleber.financeiro.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +29,6 @@ public class GlobalExceptionHandler {
     
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<String> handleInvalidInput(HttpMessageNotReadableException e) {
-        return new ResponseEntity<>("Erro ao ler a data. Verifique o formato dos dados.", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("Erro ao ler a data. Verifique o formato fornecido.", HttpStatus.BAD_REQUEST);
     }
 }

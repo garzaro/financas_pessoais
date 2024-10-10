@@ -26,7 +26,6 @@ public class DeserializadorBigDecimalCustomizado extends JsonDeserializer<BigDec
 
     private final ObjectMapper objectMapper;
 
-    /*O desserializador personalizado CustomBigDecimalDeserializer será usado automaticamente.*/
     @PostConstruct
     public void setUp(){
 

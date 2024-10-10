@@ -1,7 +1,4 @@
-package com.cleber.financas.jackson;
-
-/*ObjectMapper - permite tanto a serialização (converter objetos Java em JSON)
- quanto a desserialização (converter JSON em objetos Java*/
+package com.cleber.financeiro.jackson;
 
 import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;

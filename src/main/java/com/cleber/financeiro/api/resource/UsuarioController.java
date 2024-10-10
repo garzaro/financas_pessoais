@@ -39,18 +39,19 @@ public class UsuarioController {
     public ResponseEntity salvar(@RequestBody UsuarioCadastroDTO dto) {
         Usuario usuario = Usuario.builder()
                 .nomeCompleto(dto.getNomeCompleto())
-                .cadastroPessoaFisica(dto.getCadastroPessoaFisica())
+                .cpf(dto.getCpf())
                 .nomeUsuario(dto.getNomeUsuario())
                 .email(dto.getEmail())
                 .senha(dto.getSenha())
+                /*nigume vai passar a data de cadastro em sistema nenhum*/
                 .dataCadastro(dto.getDataCadastro())
                 .build();
 
         try {
             Usuario usuarioSalvo = usuarioService.salvarUsuario(usuario);
             return new ResponseEntity(usuarioSalvo, HttpStatus.CREATED);
-        } catch (RegraDeNegocioException mensagemDeErro) {
-            return ResponseEntity.badRequest().body(mensagemDeErro.getMessage());
+        } catch (RegraDeNegocioException regra) {
+            return ResponseEntity.badRequest().body(regra.getMessage());
         }
     }
 }
