@@ -65,7 +65,7 @@ public class LancamentoServiceImpl implements LancamentoService {
         lancamento.setStatusLancamento(status);
         atualizarLancamento(lancamento);
     }
-    
+    PROCURar onde esta o probLEMA QUE NAO ESTA SALVANDO LANCANETO POR CAUSA DA DATA
     @Override
     public void validarLancamento(Lancamento lancamento) {
 
