@@ -1,16 +1,12 @@
 package com.cleber.financeiro.api.dto;
 
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.time.LocalDate;
-
+/*optei por nao usar lombok*/
 public class UsuarioCadastroDTO {
     
     private String nomeCompleto;
-    private String cadastroPessoaFisica;
+    private String cpf;
     private String nomeUsuario;
     private String email;
     private String senha;
@@ -23,7 +19,7 @@ public class UsuarioCadastroDTO {
    private UsuarioCadastroDTO(UsuarioBuilder builder) {
         
         this.nomeCompleto = builder.nomeCompleto;
-        this.cadastroPessoaFisica = builder.cadastroPessoaFisica;
+        this.cpf = builder.cpf;
         this.nomeUsuario = builder.nomeUsuario;
         this.email = builder.email;
         this.senha = builder.senha;
@@ -34,8 +30,8 @@ public class UsuarioCadastroDTO {
         return nomeCompleto;
     }
 
-    public String getCadastroPessoaFisica(){
-        return cadastroPessoaFisica;
+    public String getCpf(){
+        return cpf;
     }
 
     public String getNomeUsuario(){
@@ -56,7 +52,7 @@ public class UsuarioCadastroDTO {
 
     public static class UsuarioBuilder{
         private String nomeCompleto;
-        private String cadastroPessoaFisica;
+        private String cpf;
         private String nomeUsuario;
         private String email;
         private String senha;
@@ -67,8 +63,8 @@ public class UsuarioCadastroDTO {
         return this;
         }
 
-        public UsuarioBuilder setCadastroPessoaFisica(String cadastroPessoaFisica) {
-            this.cadastroPessoaFisica = cadastroPessoaFisica;
+        public UsuarioBuilder setCpf(String cpf) {
+            this.cpf = cpf;
             return this;
         }
 
