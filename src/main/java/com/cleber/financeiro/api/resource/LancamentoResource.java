@@ -1,14 +1,15 @@
 package com.cleber.financeiro.api.resource;
 
+import com.cleber.financeiro.api.converter.ConvertDtoToEntity;
 import com.cleber.financeiro.api.dto.AtualizarStatusDTO;
 import com.cleber.financeiro.api.dto.LancamentoDTO;
 import com.cleber.financeiro.exception.RegraDeNegocioException;
 import com.cleber.financeiro.model.entity.Lancamento;
 import com.cleber.financeiro.model.entity.StatusLancamento;
-import com.cleber.financeiro.model.entity.TipoLancamento;
 import com.cleber.financeiro.model.entity.Usuario;
 import com.cleber.financeiro.service.LancamentoService;
 import com.cleber.financeiro.service.UsuarioService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,20 +19,17 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/lancamentos")
+@RequiredArgsConstructor
 public class LancamentoResource {
     
     private LancamentoService lancamentoService;
-    
     private UsuarioService usuarioService;
-    
-    public LancamentoResource(LancamentoService lancamentoService) {
-        this.lancamentoService = lancamentoService;
-    }
+    private final ConvertDtoToEntity toEntidadeLancamento;
     
     @PostMapping
     public ResponseEntity salvarLancamento(@RequestBody LancamentoDTO dto) {
         try {
-            Lancamento converteEntidade = converterDtoParaEntidade(dto);
+            Lancamento converteEntidade = toEntidadeLancamento.converterDtoParaEntidade(dto);
             converteEntidade = lancamentoService.salvarLancamento(converteEntidade);
             return new ResponseEntity(converteEntidade, HttpStatus.CREATED);
             
@@ -45,7 +43,7 @@ public class LancamentoResource {
         
         return lancamentoService.obterLancamentoPorId(id).map(entity -> {
             try {
-                Lancamento lancamento = converterDtoParaEntidade(dto);
+                Lancamento lancamento = toEntidadeLancamento.converterDtoParaEntidade(dto);
                 lancamento.setId(entity.getId());
                 lancamentoService.atualizarLancamento(lancamento);
                 return ResponseEntity.ok(lancamento);
@@ -107,22 +105,5 @@ public class LancamentoResource {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }).orElseGet(() ->
                 new ResponseEntity("Lançamento não encontrado na base de dados", HttpStatus.BAD_REQUEST));
-    }
-    
-    private Lancamento converterDtoParaEntidade(LancamentoDTO dto) {
-        Lancamento lancamento = new Lancamento();
-        lancamento.setId(dto.getId());
-        lancamento.setDescricao(dto.getDescricao());
-        lancamento.setAno(dto.getAno());
-        lancamento.setMes(dto.getMes());
-        lancamento.setValor(dto.getValor());
-        
-        Usuario buscarUsuario = usuarioService.obterUsuarioPorId(dto.getUsuario())
-                .orElseThrow(() -> new RegraDeNegocioException("Usuario não encontrado com o id informado"));
-        
-        lancamento.setUsuario(buscarUsuario);
-        lancamento.setTipoLancamento(TipoLancamento.valueOf(dto.getTipo()));
-        lancamento.setStatusLancamento(StatusLancamento.valueOf(dto.getStatus()));
-        return lancamento;
     }
 }
